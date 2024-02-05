@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bienvenue Au Forum</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"/>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet"/.container>
+  </head>
+
+  <body>
+
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+		  <div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+			  <span class="sr-only">Toggle navigation</span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="{% url 'accueil'  %}">Bienvenue  {{id.pseudo}}</a>
+		  </div>
+		  <div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right ">
+			  {% if auth %}
+				<li class="active nav-item"><a href="{% url 'accueil'  %}">Accueil</a></li>
+				<li><a href="{% url 'addtopic' %}">Poser une Question</a></li>
+				<li><a href="{% url 'personalProfile' me %}">Mon Profil</a></li>
+				<li><a href="{% url 'logoutUser'  %}">Deconnexion</a></li> 
+
+			  {% else %}
+				<li><a href="{% url 'login'  %}">Se Connecter</a></li>
+				<li><a href="{% url 'create'  %}">Créer un compte</a></li>
+				<li><a href="{% url 'loginAdmin'  %}">Connexion Admin </a></li>
+
+				<li class="active nav-item"><a href="{% url 'accueil'  %}">Accueil</a></li>
+			  {% endif %}
+			</ul>
+		  </div><!--/.nav-collapse -->
+		</div>
+	  </div>
+	  
+	  
+    <div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="main-col">
+					<div class="block">
+						<h1 class="pull-left">Login</h1>
+						<h4 class="pull-right">Forum Ecole-it</h4>
+						<div class="clearfix"></div>
+						<hr>
+						<form role="form" enctype="multipart/form-data" method="post" action="{%url 'login' %}">
+							{% csrf_token %}
+							<div class="form-group">
+							<label>Email*</label> <input type="email" class="form-control"
+							name="email" placeholder="Entrez votre addresse mail">
+							</div>
+					
+					    <div class="form-group">
+                        <label>Mot de passe*</label> <input type="password" class="form-control"
+                    name="password" placeholder="Enter A Password">
+              </div>
+	
+			        <input name="login" type="submit" class="color btn btn-default" value="login" />
+        </form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div id="sidebar">
+				
+					<div class="block">
+            <h3>Categories
+            </h3>
+            <div class="list-group block ">
+              <a href="#" class="list-group-item active">Tous les Sujets  <span class="badge pull-right">{{totpos}}</span></a> 
+              {% if categories %}
+              {% for cat in categories %}	
+              {% comment %} suppression de {{cat.nombre_occurences}} dans le span {% endcomment %}
+              <a href="{% url 'categorie' id=cat.pk %}" class="list-group-item">{{ cat.title }}<span class="color badge pull-right"></span></a>
+              {% endfor %}
+              {% endif %}
+            </div>
+            </div>
+      </div>
+    </div>
+  </div>
+  </div><!-- /.container -->
+
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>

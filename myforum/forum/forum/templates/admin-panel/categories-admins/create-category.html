@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>Admin Panel</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div id="wrapper">
+    <nav class="navbar header-top fixed-top navbar-expand-lg  navbar-dark bg-dark">
+      <div class="container">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav side-nav" >
+          <li class="nav-item">
+            <a class="nav-link" style="margin-left: 20px;" href="{% url 'AdminIndex' %}">Accueil
+              <span class="sr-only">(current)</span>
+            </a> 
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'AdminsList' %}" style="margin-left: 20px;">Admins</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'AdminCategory' %}"  style="margin-left: 20px;">Categories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'postedTopic' %}"  style="margin-left: 20px;">Publications</a>
+          </li>
+        
+        </ul>
+        <ul class="navbar-nav ml-md-auto d-md-flex">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'AdminIndex' %}">Accueil
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ pseudo }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'logoutAdmin' %}">Deconnexion</a>
+              
+          </li>
+                          
+          
+        </ul>
+      </div>
+    </div>
+    </nav>
+    <div class="container-fluid">
+       <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title mb-5 d-inline">Ajouter une Categorie</h5>
+          <form method="POST" action="{% url 'AdminCreateCategory' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+                <!-- Email input -->
+                <div class="form-outline mb-4 mt-4">
+                  <input type="text" name="name" id="form2Example1" class="form-control" placeholder="Nom de la Categorie" />
+                 
+                </div>
+
+                <div class="form-outline mb-4 mt-4">
+                  <input type="text" name="description" id="form2Example1" class="form-control" placeholder="description de la Categorie" />
+                 
+                </div>
+                <!-- Submit button -->
+                <button type="submit" name="submit" class="btn btn-primary  mb-4 text-center">Ajouter la catgorie</button>
+
+          
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>
