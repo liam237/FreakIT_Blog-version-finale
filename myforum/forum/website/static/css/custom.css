@@ -1,6 +1,7 @@
 body {
   padding-top: 60px;
-  background:#f4f4f4;
+  background-image: url('/static/img/bg.jpg');
+  background-size: cover; 
   font-size:15px;
 }
 
